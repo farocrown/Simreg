@@ -25,9 +25,9 @@ model = PySRRegressor(
     model_selection="best",
     niterations=10000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
-    constraints={'^': (2, 1)},
+    constraints={'^': (2, 2)},
     nested_constraints={"^": {"^": 2}},
-    maxsize=20,
+    maxsize=25,
     loss="loss(prediction, target) = (prediction - target)^2",
     # ^ Custom loss function (julia syntax)
     turbo=True,  
