@@ -9,7 +9,7 @@ from IPython.display import Markdown as md
 # This file pretends to fit data from CLASS to obtain an analytic formula for T(k). Now let's import T(k):
 
 # %%
-tf = pd.read_csv('TF_16cosmo.csv')
+tf = pd.read_csv('TF_16.csv')
 k = tf['k (h/Mpc)'].values
 x = tf['x'].values
 T = tf['T(k)'].values
