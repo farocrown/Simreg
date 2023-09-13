@@ -4,7 +4,7 @@ import pandas as pd
 from pysr import PySRRegressor
 from IPython.display import Markdown as md
 
-tf = pd.read_csv('CL_6.csv')
+tf = pd.read_csv('CL_6_50.csv')
 x = pd.DataFrame({'ell': tf['ell'], 'tau': tf['tau']})
 ee = pd.DataFrame(tf['EE'])
 #x = x.reshape(-1,1)
