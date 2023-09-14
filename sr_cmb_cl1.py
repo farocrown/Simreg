@@ -4,21 +4,17 @@ import pandas as pd
 from pysr import PySRRegressor
 from IPython.display import Markdown as md
 
-tf = pd.read_csv('CL_6_50.csv')
-x = pd.DataFrame({'ell': tf['ell'], 'tau': tf['tau']})
-ee = pd.DataFrame(tf['EE'])
+tf = pd.read_csv('CL_6_50_sort.csv')
+x = pd.DataFrame({'ell': tf['ell'][0:6], 'tau': tf['tau'][0:6]})
+ee = pd.DataFrame(tf['EE'][0:6])
 #x = x.reshape(-1,1)
-print(x)
 
 model = PySRRegressor(
     model_selection="best",
     niterations=1000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
-    unary_operators=["log","exp"],
-    #constraints={'^': (5, 2)},
-    #complexity_of_operators={"^":1},
-    #nested_constraints={"^": {"^": 2}},
-    maxsize=25,
+    #unary_operators=["log","exp","sin","cos"],
+    maxsize=10,
     loss="loss(prediction, target) = (prediction - target)^2",
     # ^ Custom loss function (julia syntax)
     #turbo=True,  
