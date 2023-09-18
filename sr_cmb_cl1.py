@@ -16,7 +16,7 @@ ee = pd.DataFrame(tf['EE/EE_ref'])
 
 model = PySRRegressor(
     model_selection="best",
-    niterations=1000,  # < Increase me for better results
+    niterations=100000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
     #unary_operators=["log","exp"],
     constraints={'^': (2, 1)},
