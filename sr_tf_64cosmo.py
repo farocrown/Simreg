@@ -5,21 +5,20 @@ from pysr import PySRRegressor
 from IPython.display import Markdown as md
 
 tf = pd.read_csv('TF_64.csv')
-k = np.array(tf['k (h/Mpc)'])
-z = np.array(tf['k (h/Mpc)']/tf['omega_m'])
-x = np.array(tf['x'])
-y = np.array([tf['k (h/Mpc)'],tf['omega_b'],tf['omega_m']])
-T = np.array(tf['T(k)'])
-x = x.reshape(-1,1)
-z = z.reshape(-1,1)
-k = k.reshape(-1,1)
+z = pd.DataFrame(tf['k (h/Mpc)']/tf['omega_m'])
+x = pd.DataFrame(tf['x'])
+y = pd.DataFrame({'k': tf['k (h/Mpc)'], 'omega_b': tf['omega_b'],'omega_m': tf['omega_m']})
+T = pd.DataFrame(tf['T(k)'])
+logT = pd.DataFrame(tf['log10(T(k))'])
+
 
 model = PySRRegressor(
     model_selection="best",
-    niterations=1000,  # < Increase me for better results
+    niterations=100000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
+    unary_operators=['log10'],
     constraints={'^': (5, 2)},
-    complexity_of_operators={"^":1},
+    #complexity_of_operators={"^":2},
     nested_constraints={"^": {"^": 2}},
     maxsize=25,
     loss="loss(prediction, target) = (prediction - target)^2",
@@ -28,12 +27,12 @@ model = PySRRegressor(
     #cluster_manager=cluster[1],
     #multithreading=True,
 )
-x_ax = z
-model.fit(x_ax,T)
 
-plt.scatter(x_ax,T, s=1, label='CLASS data')
-plt.scatter(x_ax, model.predict(x_ax), s=1, label='From PySR')
-plt.loglog()
+model.fit(y,logT)
+
+plt.scatter(x,logT, s=1, label='CLASS data')
+plt.scatter(x, model.predict(y), s=1, label='From PySR')
+#plt.loglog()
 plt.legend()
 plt.show()
 
