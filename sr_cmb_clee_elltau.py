@@ -8,7 +8,7 @@ x = pd.DataFrame({'ell': tf['ell'], 'tau': tf['tau']})
 a = []
 for i in range (20):
     a.extend(tf['EE'][0:int(len(tf)/20)])
-ee = pd.DataFrame({'EE': tf['EE']/a})
+ee = pd.DataFrame({'EE': tf['EE']/(a*np.exp(-2*x['tau']))})
 #x = x.reshape(-1,1)
 
 model = PySRRegressor(
