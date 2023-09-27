@@ -7,14 +7,14 @@ from IPython.display import Markdown as md
 tf = pd.read_csv('TF_64.csv')
 z = pd.DataFrame(tf['k (h/Mpc)']/tf['omega_m'])
 x = pd.DataFrame(tf['x'])
-y = pd.DataFrame({'k': tf['k (h/Mpc)'], 'omega_b': tf['omega_b'],'omega_m': tf['omega_m']})
+y = pd.DataFrame({'k': tf['k (h/Mpc)'], 'omega_b': tf['omega_b'],'omega_m': tf['omega_m'],'omega_nu': tf['omega_nu']})
 T = pd.DataFrame(tf['T(k)'])
 logT = pd.DataFrame(tf['log10(T(k))'])
 
 
 model = PySRRegressor(
     model_selection="best",
-    niterations=100000,  # < Increase me for better results
+    niterations=1000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
     unary_operators=['log10'],
     constraints={'^': (5, 2)},
@@ -28,9 +28,9 @@ model = PySRRegressor(
     #multithreading=True,
 )
 
-model.fit(y,logT)
+model.fit(x,T)
 
-plt.scatter(x,logT, s=1, label='CLASS data')
+plt.scatter(x,T, s=1, label='CLASS data')
 plt.scatter(x, model.predict(y), s=1, label='From PySR')
 #plt.loglog()
 plt.legend()
