@@ -13,13 +13,13 @@ T = pd.DataFrame(tf['T(k)'])
 
 model = PySRRegressor(
     model_selection="best",
-    niterations=50000,  # < Increase me for better results
+    niterations=10000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
     constraints={'^': (5, 2)},
     #complexity_of_operators={"^":1},
     #nested_constraints={"^": {"^": 2}},
     maxsize=20,
-    loss="loss(prediction, target) = (prediction - target)^2",
+    loss="loss(prediction, target) = ((prediction - target)^2) / (target^2)",
     # ^ Custom loss function (julia syntax)
     turbo=True,  
     #cluster_manager=cluster[1],
