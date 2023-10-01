@@ -21,7 +21,7 @@ model = PySRRegressor(
     #complexity_of_operators={"^":2},
     nested_constraints={"^": {"^": 2}},
     maxsize=25,
-    loss="loss(prediction, target) = (prediction - target)^2",
+    loss="loss(prediction, target) =  ((prediction - target)^2) / (target^2)",
     # ^ Custom loss function (julia syntax)
     turbo=True,  
     #cluster_manager=cluster[1],
