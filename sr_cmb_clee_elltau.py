@@ -15,12 +15,12 @@ model = PySRRegressor(
     model_selection="best",
     niterations=10000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
-    unary_operators=["log","exp"],
-    #constraints={'^': (2, 1)},
-    #nested_constraints={"^": {"^": 2}},
+    unary_operators=["log","exp",'sinh','cosh','tanh','sin','cos','tan'],
+    constraints={'^': (2, 2)},
+    nested_constraints={"^": {"^": 2}},
     #batching=True,
-    maxsize=30,
-    loss="loss(prediction, target) = (prediction - target)^2",
+    maxsize=20,
+    loss="loss(prediction, target) = ((prediction - target)^2 / (target)^2)",
     # ^ Custom loss function (julia syntax)
     turbo=True,  
     #cluster_manager=cluster[1],

@@ -19,10 +19,10 @@ model = PySRRegressor(
     niterations=100000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
     #unary_operators=["log","exp"],
-    constraints={'^': (2, 1)},
+    constraints={'^': (2, 2)},
     nested_constraints={"^": {"^": 2}},
-    maxsize=25,
-    loss="loss(prediction, target) = (prediction - target)^2",
+    maxsize=20,
+    loss="loss(prediction, target) = ((prediction - target)^2) / (target)^2",
     # ^ Custom loss function (julia syntax)
     turbo=True,  
     #cluster_manager=cluster[1],
