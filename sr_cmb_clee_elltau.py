@@ -8,12 +8,12 @@ x = pd.DataFrame({'ell': tf['ell'], 'tau': tf['tau']})
 a = []
 for i in range (20):
     a.extend(tf['EE'][0:int(len(tf)/20)])
-ee = pd.DataFrame({'EE': tf['EE']/(a*np.exp(-2*x['tau']))})
+ee = pd.DataFrame({'EE': np.exp(-2*x['tau'][0])*tf['EE']/(a*np.exp(-2*x['tau']))})
 #x = x.reshape(-1,1)
 
 model = PySRRegressor(
     model_selection="best",
-    niterations=10000,  # < Increase me for better results
+    niterations=1000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
     unary_operators=["log","exp",'sinh','cosh','tanh','sin','cos','tan'],
     constraints={'^': (2, 2)},
@@ -23,7 +23,7 @@ model = PySRRegressor(
     loss="loss(prediction, target) = ((prediction - target)^2 / (target)^2)",
     # ^ Custom loss function (julia syntax)
     turbo=True,  
-    #cluster_manager=cluster[1],
+    #cluster_manager='slurm',
     #multithreading=True,
 )
 
