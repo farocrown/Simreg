@@ -13,9 +13,10 @@ ee = pd.DataFrame({'EE': np.exp(-2*x['tau'][0])*tf['EE']/(a*np.exp(-2*x['tau']))
 
 model = PySRRegressor(
     model_selection="best",
-    niterations=1000,  # < Increase me for better results
+    niterations=100000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
     unary_operators=["log","exp",'sinh','cosh','tanh','sin','cos','tan'],
+    complexity_of_operators={"log":1,"exp":1,'sinh':1,'cosh':1,'tanh':1,'sin':1,'cos':1,'tan':1},
     constraints={'^': (2, 2)},
     nested_constraints={"^": {"^": 2}},
     #batching=True,
