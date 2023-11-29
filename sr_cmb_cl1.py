@@ -6,8 +6,8 @@ from pysr import PySRRegressor
 #for f(l) you will need Ratio(l).csv
 #for g(t) you will need Ratio(t)-l6.csv
 
-tf = pd.read_csv('Ratio(t)-l6.csv')
-x = pd.DataFrame({'tau': tf['tau']})
+tf = pd.read_csv('FINALE-ELL-NODIV-E.csv')
+x = pd.DataFrame({'ell': tf['ell']})
 ee = pd.DataFrame(tf['EE/EE_ref'])
 #x = x.reshape(-1,1)
 
@@ -16,9 +16,9 @@ ee = pd.DataFrame(tf['EE/EE_ref'])
 
 model = PySRRegressor(
     model_selection="best",
-    niterations=100000,  # < Increase me for better results
+    niterations=5000,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
-    #unary_operators=["log","exp"],
+    unary_operators=["exp"], #"log",'sinh','cosh','tanh','sin','cos','tan'],
     constraints={'^': (2, 2)},
     nested_constraints={"^": {"^": 2}},
     maxsize=20,

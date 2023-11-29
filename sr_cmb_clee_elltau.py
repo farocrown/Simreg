@@ -3,12 +3,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from pysr import PySRRegressor
 
-tf = pd.read_csv('CL_20_50.csv')
-x = pd.DataFrame({'ell': tf['ell'], 'tau': tf['tau']})
+tf = pd.read_csv('CL_20_2.csv')
+x = pd.DataFrame({'ell': tf['ell'][0:2998], 'tau': tf['tau'][0:2998]})
 a = []
 for i in range (20):
     a.extend(tf['EE'][0:int(len(tf)/20)])
-ee = pd.DataFrame({'EE': np.exp(-2*x['tau'][0])*tf['EE']/(a*np.exp(-2*x['tau']))})
+ee = pd.DataFrame({'EE': tf['EE'][0:2998]})
+#ee = pd.DataFrame({'EE': np.exp(-2*x['tau'][0])*tf['EE']/(a*np.exp(-2*x['tau']))})
 #x = x.reshape(-1,1)
 
 model = PySRRegressor(
