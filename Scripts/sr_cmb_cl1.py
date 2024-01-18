@@ -2,11 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from pysr import PySRRegressor
+import os
 
 #for f(l) you will need Ratio(l).csv
 #for g(t) you will need Ratio(t)-l6.csv
 
-tf = pd.read_csv('FINALE-ELL-NODIV-E.csv')
+script_folder = os.path.dirname(os.path.abspath(__file__)) #Script directory path
+data_folder = os.path.join(script_folder, "..", "Data") #Data directory path
+file_path = os.path.join(data_folder, "FINALE-ELL-NODIV-E.csv") #File path
+
+tf = pd.read_csv(file_path)
 x = pd.DataFrame({'ell': tf['ell']})
 ee = pd.DataFrame(tf['EE/EE_ref'])
 #x = x.reshape(-1,1)

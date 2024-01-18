@@ -2,9 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from pysr import PySRRegressor
-from IPython.display import Markdown as md
+import os
 
-tf = pd.read_csv('TF_64.csv')
+script_folder = os.path.dirname(os.path.abspath(__file__)) #Script directory path
+data_folder = os.path.join(script_folder, "..", "Data") #Data directory path
+file_path = os.path.join(data_folder, "TF_64.csv") #File path
+
+tf = pd.read_csv(file_path)
 z = pd.DataFrame(tf['k (h/Mpc)']/tf['omega_m'])
 x = pd.DataFrame(tf['x'])
 y = pd.DataFrame({'k': tf['k (h/Mpc)'], 'omega_b': tf['omega_b'],'omega_m': tf['omega_m'],'omega_nu': tf['omega_nu']})
