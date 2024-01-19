@@ -2,12 +2,8 @@ import os
 import shutil
 
 def file_path(file_name):
-    #Definition of the path of the folders and files
     script_folder = os.path.dirname(os.path.abspath(__file__)) 
     data_folder = os.path.join(script_folder, "..", "Data") 
-    pkl_folder = os.path.join(script_folder, "..", "models", "pkl")
-    csv_folder = os.path.join(script_folder,"..", "models", "csv")
-
     file_path = os.path.join(data_folder,file_name) #File path
     return file_path
 
