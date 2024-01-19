@@ -2,14 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from pysr import PySRRegressor
-import os
+import custom_paths as cp
 
 #for f(l) you will need Ratio(l).csv
 #for g(t) you will need Ratio(t)-l6.csv
 
-script_folder = os.path.dirname(os.path.abspath(__file__)) #Script directory path
-data_folder = os.path.join(script_folder, "..", "Data") #Data directory path
-file_path = os.path.join(data_folder, "FINALE-ELL-NODIV-E.csv") #File path
+file_path = cp.file_path("FINALE-ELL-NODIV-E.csv")
 
 tf = pd.read_csv(file_path)
 x = pd.DataFrame({'ell': tf['ell']})
@@ -35,6 +33,8 @@ model = PySRRegressor(
 )
 
 model.fit(x,ee)
+
+cp.move_files()
 
 plt.scatter(x,ee, s=1, label='CLASS data')
 plt.scatter(x, model.predict(x), s=1, label='From PySR')

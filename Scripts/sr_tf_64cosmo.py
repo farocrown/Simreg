@@ -2,11 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from pysr import PySRRegressor
-import os
+import custom_paths as cp
 
-script_folder = os.path.dirname(os.path.abspath(__file__)) #Script directory path
-data_folder = os.path.join(script_folder, "..", "Data") #Data directory path
-file_path = os.path.join(data_folder, "TF_64.csv") #File path
+file_path = cp.file_path("TF_64.csv")
 
 tf = pd.read_csv(file_path)
 z = pd.DataFrame(tf['k (h/Mpc)']/tf['omega_m'])
@@ -31,6 +29,8 @@ model = PySRRegressor(
 )
 
 model.fit(x,T)
+
+cp.move_files()
 
 plt.scatter(x[0:114],T[0:114], s=1, label='CLASS data')
 plt.plot(x[0:114], model.predict(x)[0:114], color='r', label='From PySR')

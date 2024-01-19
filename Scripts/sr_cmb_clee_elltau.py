@@ -2,11 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from pysr import PySRRegressor
-import os
+import custom_paths as cp
 
-script_folder = os.path.dirname(os.path.abspath(__file__)) #Script directory path
-data_folder = os.path.join(script_folder, "..", "Data") #Data directory path
-file_path = os.path.join(data_folder, "CL_20_2.csv") #File path
+file_path = cp.file_path("CL_20_2.csv")
 
 tf = pd.read_csv(file_path)
 x = pd.DataFrame({'ell': tf['ell'][0:2998], 'tau': tf['tau'][0:2998]})
@@ -34,6 +32,8 @@ model = PySRRegressor(
 )
 
 model.fit(x,ee)
+
+cp.move_files()
 
 plt.scatter(x['ell'],ee, s=1, label='CLASS data')
 plt.scatter(x['ell'], model.predict(x), s=1, label='From PySR')

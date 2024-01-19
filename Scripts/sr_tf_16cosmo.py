@@ -2,11 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from pysr import PySRRegressor
-import os
+import custom_paths as cp
 
-script_folder = os.path.dirname(os.path.abspath(__file__)) #Script directory path
-data_folder = os.path.join(script_folder, "..", "Data") #Data directory path
-file_path = os.path.join(data_folder, "TF_16.csv") #File path
+file_path = cp.file_path("TF_16.csv")
 
 tf = pd.read_csv(file_path)
 z = pd.DataFrame(tf['k (h/Mpc)']/tf['omega_m'])
@@ -17,7 +15,7 @@ logT = pd.DataFrame(tf['log10(T(k))'])
 
 model = PySRRegressor(
     model_selection="best",
-    niterations=10000,  # < Increase me for better results
+    niterations=2,  # < Increase me for better results
     binary_operators=["+","*","-","/","^"],
     #unary_operators=['log10'],
     constraints={'^': (3, 2)},
@@ -31,8 +29,10 @@ model = PySRRegressor(
     #multithreading=True,
 )
 
-#model.fit(x,T)
+
 model.fit(x,T)
+
+cp.move_files()
 
 #plt.scatter(x,T, s=1, label='CLASS data')
 #plt.scatter(x, model.predict(x), s=1, label='From PySR')
@@ -41,6 +41,8 @@ plt.scatter(x, model.predict(x), s=1, label='From PySR')
 plt.loglog()
 plt.legend()
 plt.show()
+
+
 
 
 
