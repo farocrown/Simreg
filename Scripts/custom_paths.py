@@ -10,8 +10,8 @@ def file_path(file_name):
 def move_files():
     script_folder = os.path.dirname(os.path.abspath(__file__)) 
     data_folder = os.path.join(script_folder, "..", "Data") 
-    pkl_folder = os.path.join(script_folder, "..", "models", "pkl")
-    csv_folder = os.path.join(script_folder,"..", "models", "csv")
+    pkl_folder = os.path.join(script_folder, "..", "Models", "pkl")
+    csv_folder = os.path.join(script_folder,"..", "Models", "csv")
     current_files = os.listdir() #Folder content
     file_prefix = "hall_of_fame_"
     matching_files = [file for file in current_files if file.startswith(file_prefix)]
