@@ -24,7 +24,7 @@ A copy of each graph is saved in the 'Images' folder.
 
 ### Validation tests
 In the 'Notebooks' folder, you can find two file to test the algorithms outside their range of training:
-1. **sr_tf_test_hypercube.ipynb** a notebook that tests the expression for $T(k)$,
+1. **sr_tf_test_hypercube.ipynb** a notebook that tests the expressions for $T(k)$,
 2. **sr_cmb_extrapolation.ipynb** a notebook that proposes a more interesting formula for $C_{\ell}^{EE}$.
 
 Feel free to explore, analyze, and contribute to the further development of this project. If you have any questions or suggestions, please don't hesitate to reach out!
