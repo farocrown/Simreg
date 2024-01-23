@@ -1,5 +1,5 @@
 # Cosmological application of symbolic regression algorithms 
-This repository contains the code that I implemented for my bachelor degree. My project aims to get simple and closed analityc formulae for the Matter Transfer Function, that we will call $T(k)$ and the power spectrum of CMB polarization anisotropies, namely $C_{\ell}^{EE}$.
+This repository contains the code that I implemented for my bachelor degree. My project aims to get simple and closed analytic formulae for the Matter Transfer Function, that we will call $T(k)$ and the power spectrum of CMB polarization anisotropies, namely $C_{\ell}^{EE}$.
 
 ### Datasets 
 In the 'Notebooks' folder, you can find two files that generate the datasets:
